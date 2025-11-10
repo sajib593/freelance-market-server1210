@@ -50,7 +50,13 @@ async function run() {
 
     // add jobs api
 
-  
+    app.post('/allJobs', async(req, res)=>{
+
+      let newJob = req.body;
+      let result = await allJobsCollection.insertOne(newJob);
+      res.send(result)
+
+    })
 
 
     // fins and show viewDetails 

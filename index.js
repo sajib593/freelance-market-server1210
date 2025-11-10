@@ -91,6 +91,31 @@ async function run() {
 
 
 
+        // Update job by ID
+        
+app.put('/allJobs/:id', async (req, res) => {
+  const id = req.params.id;
+  const updatedJob = req.body;
+
+  const filter = { _id: new ObjectId(id) };
+  const updateDoc = {
+    $set: {
+      title: updatedJob.title,
+      category: updatedJob.category,
+      summary: updatedJob.summary,
+      coverImage: updatedJob.coverImage,
+      postedBy: updatedJob.postedBy,
+      postedDate: new Date().toISOString(),
+    },
+  };
+
+
+   const result = await allJobsCollection.updateOne(filter, updateDoc);
+  res.send(result);
+});
+
+
+
 
 
 

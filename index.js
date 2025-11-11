@@ -137,6 +137,33 @@ app.put('/allJobs/:id', async (req, res) => {
     })
 
 
+    app.get('/my-accepted-tasks-email', async(req,res)=>{
+
+      let email = req.query.email;
+      let query = {}
+
+      if(email){
+
+        query.userEmail = email;
+
+      }
+
+      let cursor = acceptedTaskCollection.find(query)
+      let result = await cursor.toArray()
+      res.send(result)
+    })
+
+
+    app.delete('/deleteJob/:id', async(req, res)=>{
+
+      let id = req.params.id;
+      let query = {_id: new ObjectId(id)}
+      let result = await acceptedTaskCollection.deleteOne(query)
+      res.send(result)
+
+    })
+
+
 
 
 

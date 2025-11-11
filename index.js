@@ -37,9 +37,17 @@ async function run() {
 
     let db = client.db('ferrlanceMarket');
     let allJobsCollection = db.collection('allJobs');
+    let acceptedTaskCollection = db.collection('acceptedTask')
 
 
     app.get('/allJobs', async(req, res)=>{
+
+      let allJobs = await allJobsCollection.find().limit(6).toArray();
+      // console.log(allJobs);
+      res.send(allJobs)
+
+    })
+    app.get('/allJobss', async(req, res)=>{
 
       let allJobs = await allJobsCollection.find().toArray();
       // console.log(allJobs);
@@ -113,6 +121,20 @@ app.put('/allJobs/:id', async (req, res) => {
    const result = await allJobsCollection.updateOne(filter, updateDoc);
   res.send(result);
 });
+
+
+
+
+// from viewdetails to accepted task 
+
+
+ app.post('/my-accepted-tasks', async(req, res)=>{
+
+      let newTasks = req.body;
+      let result = await acceptedTaskCollection.insertOne(newTasks);
+      res.send(result)
+
+    })
 
 
 

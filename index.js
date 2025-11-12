@@ -139,17 +139,17 @@ app.put('/allJobs/:id', async (req, res) => {
 
     app.get('/my-accepted-tasks-email', async(req,res)=>{
 
-      let email = req.query.email;
-      let query = {}
+      // let email = req.query.email;
+      // let query = {}
 
-      if(email){
+      // if(email){
 
-        query.userEmail = email;
+      //   query.userEmail = email;
 
-      }
+      // }
 
-      let cursor = acceptedTaskCollection.find(query)
-      let result = await cursor.toArray()
+      let result = await acceptedTaskCollection.find().toArray()
+      // let result = await cursor.toArray()
       res.send(result)
     })
 

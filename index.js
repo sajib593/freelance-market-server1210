@@ -49,7 +49,7 @@ async function run() {
     })
     app.get('/allJobss', async(req, res)=>{
 
-      let allJobs = await allJobsCollection.find().toArray();
+      let allJobs = await allJobsCollection.find().sort({postedDate: -1}).toArray();
       // console.log(allJobs);
       res.send(allJobs)
 
